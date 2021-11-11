@@ -26,6 +26,7 @@ function renderDocument(context, appHtml) {
         <!doctype html>
         <html>
             <head>
+                <link rel="stylesheet" href="./static/styles.css">
             </head>
             <body>
                 <div id="app">${appHtml}</div>

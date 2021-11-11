@@ -9,7 +9,7 @@ import { Quest } from './routes/quest/index.js';
 export class Client extends Component {
     render() {
         return (
-            <div className={'text'} onClick={this.handleClick}>
+            <div className={'test'} onClick={this.handleClick}>
                 <Switch>
                     <Route path='/quest' component={Quest} />
                     <Route path='/create' component={Create} />

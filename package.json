@@ -38,10 +38,11 @@
     "css-loader": "^6.5.1",
     "directory-named-webpack-plugin": "^4.0.1",
     "ignore-styles": "^5.0.1",
+    "mini-css-extract-plugin": "^2.4.4",
     "nodemon": "^2.0.15",
     "serve-static": "^1.14.1",
     "style-loader": "^3.3.1",
-    "webpack": "^5.63.0",
+    "webpack": "^5.44.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",
     "webpack-node-externals": "^3.0.0"
