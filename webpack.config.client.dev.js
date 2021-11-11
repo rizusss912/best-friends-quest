@@ -41,6 +41,7 @@ module.exports = {
           new DirectoryNamedWebpackPlugin({
             transformFn: function(dirName) {
               return [
+                dirName,
                 dirName + ".jsx",
                 dirName + ".js",
                 "index.jsx",

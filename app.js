@@ -13,9 +13,9 @@ const __dirname = path.dirname(__filename);
 
 app.use('/static', statics(path.join(__dirname, 'dist', 'public')));
 
-app.get('/', async (req, res) => {
+app.use('/', async (req, res) => {
    const context = createContext();
-   const out = await ssr(context, Client);
+   const out = await ssr(context, Client, req.path);
 
    res.send(out.html);
 })

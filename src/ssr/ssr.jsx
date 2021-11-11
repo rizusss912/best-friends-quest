@@ -3,13 +3,18 @@ import 'regenerator-runtime/runtime';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 
-export async function ssr(context, Client) {
+export async function ssr(context, Client, path = '/') {
     const out = {};
 
     Client.contextType = React.createContext(context);
 
-    const appHtml = renderToString(<Client />);
+    const appHtml = renderToString(
+        <StaticRouter context={context} location={path}>
+            <Client />
+        </StaticRouter>
+    );
 
     out.html = renderDocument(context, appHtml);
 
@@ -23,13 +28,10 @@ function renderDocument(context, appHtml) {
             <head>
             </head>
             <body>
-                <div id="app">
-                    ${appHtml}
-                </div>
+                <div id="app">${appHtml}</div>
             </body>
-            <script>
-                window.context = '${JSON.stringify(context)}';
-            </script>
+
+            <script>window.context = '${JSON.stringify(context)}';</script>
             <script src="./static/bundle.js"></script>
         </html>
     `;
