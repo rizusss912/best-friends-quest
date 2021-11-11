@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "webpack --watch --config webpack.config.dev.js",
-    "server-dev": "node --experimental-specifier-resolution=node index.js",
-    "dev": "concurrently --kill-others \"npm run build-dev\" \"npm run server-dev\""
+    "build:client-dev": "webpack --watch --config webpack.config.client.dev.js",
+    "watch:server-dev": "webpack --watch --config webpack.config.server.dev.js",
+    "start:server-dev": "webpack --config webpack.config.server.dev.js && nodemon --experimental-specifier-resolution=node dist/private/server.js",
+    "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\""
   },
   "babel": {
     "presets": [
@@ -19,11 +20,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.19.1",
     "express": "^4.17.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.9"
   },
-  "type": "module",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
@@ -34,10 +36,12 @@
     "css-loader": "^6.5.1",
     "directory-named-webpack-plugin": "^4.0.1",
     "ignore-styles": "^5.0.1",
+    "nodemon": "^2.0.15",
     "serve-static": "^1.14.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.63.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.4.0"
+    "webpack-dev-server": "^4.4.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }

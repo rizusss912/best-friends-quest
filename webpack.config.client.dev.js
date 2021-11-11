@@ -1,14 +1,10 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-import DirectoryNamedWebpackPlugin from 'directory-named-webpack-plugin';
+const path = require('path');
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const config = {
-    entry: './bundle.jsx',
+module.exports = {
+    entry: './src/bundle.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist/public'),
         filename: 'bundle.js',
     },
     mode: 'development',
@@ -44,11 +40,17 @@ const config = {
         plugins: [
           new DirectoryNamedWebpackPlugin({
             transformFn: function(dirName) {
-              return ["index.jsx", dirName + "/" + ".index.jsx"]
+              return [
+                dirName + ".jsx",
+                dirName + ".js",
+                "index.jsx",
+                dirName + "/" + ".index.jsx",
+                "index.js",
+                dirName + "/" + ".index.js",
+              ]
             }
           })
-        ]
+        ],
+        extensions: ['', '.js', '.jsx'],
       }
 };
-
-export default config;
