@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
+import './create.css';
+
 export class Create extends Component {
     render() {
         return (
-            <div>create</div>
+            <div className={'create'}>create</div>
         );
     }
 }

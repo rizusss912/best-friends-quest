@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 
+import './home.css';
+
+
 export class Home extends Component {
     render() {
         return (
-            <div>home</div>
+            <div className={'home'}>home</div>
         );
     }
 }

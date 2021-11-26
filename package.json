@@ -8,7 +8,8 @@
     "build:client-dev": "webpack --watch --config webpack.config.client.dev.js",
     "watch:server-dev": "webpack --watch --config webpack.config.server.dev.js",
     "start:server-dev": "webpack --config webpack.config.server.dev.js && nodemon --experimental-specifier-resolution=node dist/private/server.js",
-    "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\""
+    "watch:styles-dev": "webpack --watch --config webpack.config.server.styles.js",
+    "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\" \"npm run watch:styles-dev\""
   },
   "babel": {
     "presets": [
@@ -37,6 +38,7 @@
     "concurrently": "^6.3.0",
     "css-loader": "^6.5.1",
     "directory-named-webpack-plugin": "^4.0.1",
+    "ignore-loader": "^0.1.2",
     "ignore-styles": "^5.0.1",
     "mini-css-extract-plugin": "^2.4.4",
     "nodemon": "^2.0.15",

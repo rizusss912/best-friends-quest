@@ -5,11 +5,13 @@ import { Home } from './routes/home/index.js';
 import { Create } from './routes/create/index.js';
 import { Quest } from './routes/quest/index.js';
 
+import './client.css';
+
 
 export class Client extends Component {
     render() {
         return (
-            <div className={'test'} onClick={this.handleClick}>
+            <div className={'app'} onClick={this.handleClick}>
                 <Switch>
                     <Route path='/quest' component={Quest} />
                     <Route path='/create' component={Create} />
