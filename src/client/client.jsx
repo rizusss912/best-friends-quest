@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, createContext } from 'react';
 import { Route, Switch } from 'react-router';
+import PropTypes from 'prop-types';
 
-import { Home } from './routes/home/index.js';
-import { Create } from './routes/create/index.js';
-import { Quest } from './routes/quest/index.js';
+import { Home } from './routes/home';
+import { Create } from './routes/create';
+import { Quest } from './routes/quest';
 
 import './client.css';
-
 
 export class Client extends Component {
     render() {
         return (
             <div className={'app'} onClick={this.handleClick}>
                 <Switch>
-                    <Route path='/quest' component={Quest} />
-                    <Route path='/create' component={Create} />
-                    <Route path='/' component={Home} />
+                    <Route path='/quest' component={this.provideContext(Quest)} />
+                    <Route path='/create' component={this.provideContext(Create)} />
+                    <Route path='/' component={this.provideContext(Home)} />
                 </Switch>
                 {this.context.texts.TEST_TEXT}
             </div>
         );
     }
 
-    handleClick = e => {
-        console.log(e);
+    provideContext = component => {
+        component.contextType = Client.contextType;
+        return component;
     }
 }

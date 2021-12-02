@@ -1,0 +1,1 @@
+export const MAX_QUESTIONS_IN_QUEST = 20;

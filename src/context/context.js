@@ -1,10 +1,6 @@
-import ru from './texts/ru.json';
+import { textsMap } from './constants/texts-map';
 
-const textsMap = {
-    ru: ru,
-}
-
-export function createContext(lang = 'ru') {
+export function createContext(lang) {
     return {
         texts: textsMap[lang],
     };

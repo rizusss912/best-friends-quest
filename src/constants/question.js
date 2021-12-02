@@ -1,0 +1,1 @@
+export const QUESTIONS_OF_PAGE_COUNT = 20;

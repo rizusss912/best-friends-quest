@@ -1,14 +1,18 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import React from 'react';
+import React, { createContext } from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+
+const mockClientContext = {
+    apiUrl: ''
+};
 
 export async function ssr(context, Client, path = '/') {
     const out = {};
 
-    Client.contextType = React.createContext(context);
+    Client.contextType = createContext(Object.assign({}, mockClientContext, context));
 
     const appHtml = renderToString(
         <StaticRouter context={context} location={path}>
@@ -26,7 +30,7 @@ function renderDocument(context, appHtml) {
         <!doctype html>
         <html>
             <head>
-                <link rel="stylesheet" href="./static/styles.css">
+                <link rel="stylesheet" href="./static/bundle.css">
             </head>
             <body>
                 <div id="app">${appHtml}</div>
