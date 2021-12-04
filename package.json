@@ -8,6 +8,10 @@
     "watch:server-dev": "webpack --watch --config webpack.config.server.dev.js",
     "start:server-dev": "webpack --config webpack.config.server.dev.js && nodemon --experimental-specifier-resolution=node dist/private/server.js",
     "watch:styles-dev": "webpack --watch --config webpack.config.styles.dev.js",
+    "build:client": "webpack --config webpack.config.client.dev.js",
+    "build:styles": "webpack --config webpack.config.styles.dev.js",
+    "build:netlify-app": "webpack --config webpack.config.netlify-app.js",
+    "netlify-app": "npm run build:client && npm run build:styles && npm run build:netlify-app",
     "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\" \"npm run watch:styles-dev\""
   },
   "babel": {
