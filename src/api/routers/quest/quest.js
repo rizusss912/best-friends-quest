@@ -14,7 +14,6 @@ router.use(bodyParser.json());
 router.get('/create-status', async function(req, res) {
     try {
         const questId = req.cookies[cookieNames.idOfQuestBeingCreated];
-        validate();
         const quest = await connect(async () => {
             return await questsService.getQuestStatus(questId);
         });
