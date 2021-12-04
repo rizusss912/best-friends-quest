@@ -13,7 +13,7 @@
     "build:server": "webpack --config webpack.config.server.dev.js",
     "build:netlify-app": "webpack --config webpack.config.netlify-app.js",
     "build:netlify": "npm run build:client && npm run build:styles && npm run build:netlify-app && ./node_modules/.bin/netlify-lambda build dist/private",
-    "start": "npm run build:client && npm run build:styles && npm run build:server && node dist/private/server.js",
+    "start": "npm install && npm run build:client && npm run build:styles && npm run build:server && node dist/private/server.js",
     "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\" \"npm run watch:styles-dev\""
   },
   "babel": {
