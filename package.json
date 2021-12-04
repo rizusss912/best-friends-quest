@@ -14,7 +14,7 @@
     "build:netlify-app": "webpack --config webpack.config.netlify-app.js",
     "build:netlify": "npm run build:client && npm run build:styles && npm run build:netlify-app && ./node_modules/.bin/netlify-lambda build dist/private",
     "heroku-prebuild": "npm install --dev",
-    "start": "npm install && npm run build:client && npm run build:styles && npm run build:server && node dist/private/server.js",
+    "start": "npm run build:client && npm run build:styles && npm run build:server && node dist/private/server.js",
     "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\" \"npm run watch:styles-dev\""
   },
   "babel": {
@@ -27,6 +27,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rails/webpacker": "5.2.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.19.1",
