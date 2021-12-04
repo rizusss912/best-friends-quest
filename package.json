@@ -11,7 +11,7 @@
     "build:client": "webpack --config webpack.config.client.dev.js",
     "build:styles": "webpack --config webpack.config.styles.dev.js",
     "build:netlify-app": "webpack --config webpack.config.netlify-app.js",
-    "build:netlify": "npm run build:client && npm run build:styles && npm run build:netlify-app",
+    "build:netlify": "npm run build:client && npm run build:styles && npm run build:netlify-app && ./node_modules/.bin/netlify-lambda build dist/private",
     "dev": "concurrently --kill-others \"npm run build:client-dev\" \"npm run start:server-dev\" \"npm run watch:server-dev\" \"npm run watch:styles-dev\""
   },
   "babel": {
@@ -29,6 +29,7 @@
     "core-js": "^3.19.1",
     "express": "^4.17.1",
     "mongodb": "^4.2.0",
+    "netlify-lambda": "^2.0.15",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
