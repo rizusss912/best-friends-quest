@@ -28,7 +28,7 @@ export async function connect(callback) {
 
             isOpenDB = true;
         } catch (e) {
-            console.log('Logger: failed mongodb connect');
+            console.log('Logger: failed mongodb connect: ', e);
             throw new Error('bd: failed to connect to the database');
         }
     }
