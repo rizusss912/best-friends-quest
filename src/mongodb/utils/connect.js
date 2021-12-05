@@ -36,14 +36,15 @@ export async function connect(callback) {
     try {
         return await callback();
     } catch (e) {
+        console.log(users, isOpenDB, e);
         throw e;
     } finally {
         users--;
         if (users === 0 && isOpenDB) {
             disconnectTimeout = setTimeout(async () => {
                 if (isOpenDB) {
-                    await mongodb.close();
                     isOpenDB = false;
+                    await mongodb.close();
                     console.log('Logger: mongodb disconnect');
                 }
             }, 1000 * 60);
