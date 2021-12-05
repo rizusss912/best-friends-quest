@@ -47,7 +47,7 @@ export async function connect(callback) {
                     await mongodb.close();
                     console.log('Logger: mongodb disconnect');
                 }
-            }, 1000 * 60);
+            }, 60);
         }
     }
 }
