@@ -8,7 +8,6 @@ let disconnectTimeout = null;
 let connectPromise = null; 
 
 export async function connect(callback) {
-    console.log(users, isOpenDB, connectPromise, disconnectTimeout);
     users++;
 
     if (!isOpenDB) {
@@ -24,6 +23,7 @@ export async function connect(callback) {
             } else {
                 connectPromise = mongodb.connect();
                 await connectPromise;
+                connectPromise = null;
                 console.log('Logger: mongodb connect');
             }
 
@@ -37,10 +37,8 @@ export async function connect(callback) {
     try {
         return await callback();
     } catch (e) {
-        console.log(users, isOpenDB, e);
         throw e;
     } finally {
-        console.log('finally', users, isOpenDB);
         users--;
         if (users === 0 && isOpenDB) {
             disconnectTimeout = setTimeout(async () => {
