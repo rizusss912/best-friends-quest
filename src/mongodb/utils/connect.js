@@ -1,13 +1,15 @@
 import { MongoDB } from '../mongodb';
 
-const mongodb = new MongoDB();
+//TODO: грязь
 
 let users = 0;
 let isOpenDB = false;
 let disconnectTimeout = null;
 let connectPromise = null; 
+let disconnectPromise = null;
 
 export async function connect(callback) {
+    const mongodb = new MongoDB();
     users++;
 
     if (!isOpenDB) {
@@ -21,6 +23,11 @@ export async function connect(callback) {
                 await connectPromise;
                 connectPromise = null;
             } else {
+                if (disconnectPromise) {
+                    await disconnectPromise;
+                    disconnectPromise = null;
+                }
+
                 connectPromise = mongodb.connect();
                 await connectPromise;
                 connectPromise = null;
@@ -40,14 +47,19 @@ export async function connect(callback) {
         throw e;
     } finally {
         users--;
-        if (users === 0 && isOpenDB) {
-            disconnectTimeout = setTimeout(async () => {
-                if (isOpenDB) {
-                    isOpenDB = false;
-                    await mongodb.close();
-                    console.log('Logger: mongodb disconnect');
-                }
-            }, 1000 * 60);
+        if (users !== 0 || !isOpenDB) {
+            return;
         }
+        disconnectTimeout = setTimeout(async () => {
+            if (!isOpenDB || connectPromise || disconnectPromise) {
+                return;
+            }
+
+            isOpenDB = false;
+            disconnectPromise = mongodb.close();
+            await disconnectPromise;
+            disconnectPromise = null;
+            console.log('Logger: mongodb disconnect');
+        }, 1000 * 60);
     }
 }

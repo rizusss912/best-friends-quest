@@ -1,6 +1,7 @@
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   entry: './src/client/index.js',
@@ -13,6 +14,21 @@ module.exports = {
       filename: 'bundle.css',
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
+  },
   module: {
     rules: [
       {
